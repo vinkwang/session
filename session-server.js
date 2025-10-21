@@ -52,12 +52,14 @@ app.get("/servers/list", (req, res) => {
 
   const activeServers = Array.from(servers.values());
   console.log(`📜 /servers/list requested — ${activeServers.length} active server(s)`);
-  res.json(activeServers);
+
+  // ✅ Wrap the response in an object so the client can use .data.servers
+  res.json({ servers: activeServers });
 });
 
 // Default root message
 app.get("/", (req, res) => {
-  res.send("✅ BlockCraft Session Server is running.");
+  res.send("Welcome, BlockCraft Session Server is still up and running.");
 });
 
 const PORT = process.env.PORT || 3000;
